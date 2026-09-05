@@ -1,6 +1,16 @@
 :root {
   color-scheme: dark;
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-family:
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    "Noto Sans CJK SC",
+    "PingFang SC",
+    "Microsoft YaHei",
+    sans-serif;
+
+  background: #02050d;
+  color: rgba(244, 247, 255, 0.94);
 }
 
 * {
@@ -10,52 +20,178 @@
 html,
 body {
   margin: 0;
+  min-width: 100%;
+  min-height: 100%;
+  background: #02050d;
+}
+
+html {
   min-height: 100%;
 }
 
 body {
   min-height: 100vh;
-  display: grid;
-  grid-template-rows: 1fr auto;
-  background: #05070d;
-  color: #f4f6ff;
+  min-height: 100svh;
+  overflow: hidden;
+  position: relative;
+  background:
+    radial-gradient(circle at 50% 45%, rgba(32, 72, 158, 0.10), rgba(2, 5, 13, 0) 36%),
+    radial-gradient(circle at 20% 18%, rgba(66, 125, 255, 0.08), rgba(2, 5, 13, 0) 28%),
+    radial-gradient(circle at 80% 25%, rgba(50, 96, 214, 0.06), rgba(2, 5, 13, 0) 30%),
+    radial-gradient(circle at 50% 85%, rgba(12, 22, 48, 0.30), rgba(2, 5, 13, 0) 45%),
+    linear-gradient(180deg, #030816 0%, #02050d 55%, #010309 100%);
 }
 
-main {
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(circle at 50% 50%, rgba(120, 180, 255, 0.035), transparent 55%),
+    radial-gradient(circle at 15% 75%, rgba(90, 140, 255, 0.025), transparent 35%),
+    radial-gradient(circle at 80% 20%, rgba(90, 140, 255, 0.02), transparent 28%);
+  opacity: 0;
+  transition: opacity 5s ease;
+}
+
+body.ready::before {
+  opacity: 1;
+}
+
+button {
+  font: inherit;
+}
+
+#sky {
+  position: fixed;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  transition: opacity 4.5s ease;
+}
+
+body.ready #sky {
+  opacity: 1;
+}
+
+.scene {
+  position: relative;
+  z-index: 1;
+  min-height: 100vh;
+  min-height: 100svh;
   display: grid;
-  place-content: center;
+  place-items: center;
   padding: 2rem;
+  pointer-events: none;
+}
+
+.words {
   text-align: center;
+  transform: translateY(-1vh);
+  opacity: 0;
+  transition:
+    opacity 4s ease 1.2s,
+    transform 5s ease 1.2s;
+}
+
+body.ready .words {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 h1 {
   margin: 0;
-  font-size: clamp(4rem, 18vw, 12rem);
-  font-weight: 300;
-  letter-spacing: 0.08em;
+  font-size: clamp(3.4rem, 11vw, 7.5rem);
+  font-weight: 200;
+  letter-spacing: 0.18em;
+  text-indent: 0.18em;
+  color: rgba(246, 249, 255, 0.88);
+  text-shadow:
+    0 0 18px rgba(160, 196, 255, 0.18),
+    0 0 40px rgba(110, 160, 255, 0.10),
+    0 0 90px rgba(88, 142, 255, 0.07);
 }
 
-p {
-  margin-top: 1rem;
-  opacity: 0.6;
+.words p {
+  margin: 1.2rem 0 0;
+  font-size: clamp(0.78rem, 1.8vw, 0.96rem);
+  font-weight: 300;
+  letter-spacing: 0.30em;
+  text-indent: 0.30em;
+  color: rgba(226, 236, 255, 0.48);
+  text-shadow: 0 0 20px rgba(110, 160, 255, 0.08);
 }
 
 footer {
-  padding: 1.5rem;
-  text-align: center;
+  position: fixed;
+  z-index: 2;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  justify-content: center;
+  padding:
+    1.25rem
+    1.25rem
+    max(1.25rem, env(safe-area-inset-bottom));
+  pointer-events: none;
 }
 
-button {
+[data-contact] {
+  appearance: none;
   border: 0;
-  padding: 0;
+  padding: 0.65rem 0.85rem;
   background: transparent;
-  color: inherit;
-  font: inherit;
-  opacity: 0.45;
+  color: rgba(235, 240, 255, 0.24);
+  font-size: 0.72rem;
+  font-weight: 300;
+  letter-spacing: 0.2em;
   cursor: pointer;
+  pointer-events: auto;
+  transition:
+    color 600ms ease,
+    opacity 600ms ease,
+    text-shadow 600ms ease;
 }
 
-button:hover,
-button:focus-visible {
-  opacity: 1;
+[data-contact]:hover {
+  color: rgba(235, 240, 255, 0.72);
+  text-shadow: 0 0 20px rgba(120, 170, 255, 0.16);
+}
+
+[data-contact]:focus-visible {
+  outline: 1px solid rgba(235, 240, 255, 0.42);
+  outline-offset: 0.25rem;
+  color: rgba(235, 240, 255, 0.82);
+}
+
+.noscript {
+  position: fixed;
+  inset: 0;
+  display: grid;
+  place-content: center;
+  text-align: center;
+  background: #02050d;
+}
+
+.noscript p:first-child {
+  margin: 0;
+  font-size: 4rem;
+}
+
+.noscript p:last-child {
+  opacity: 0.45;
+  letter-spacing: 0.2em;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #sky,
+  .words,
+  body::before {
+    transition-duration: 0.01ms;
+    transition-delay: 0ms;
+  }
 }
