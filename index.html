@@ -3,6 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#02040a">
   <meta name="description" content="">
   <title>星空</title>
 
@@ -13,13 +14,24 @@
 </head>
 
 <body>
-  <main>
-    <h1>星空</h1>
-    <p>抬头看。</p>
+  <canvas id="sky" aria-hidden="true"></canvas>
+
+  <main class="scene">
+    <div class="words">
+      <h1>星空</h1>
+      <p>抬头看。</p>
+    </div>
   </main>
 
   <footer>
     <button type="button" data-contact>联系</button>
   </footer>
+
+  <noscript>
+    <div class="noscript">
+      <p>星空</p>
+      <p>抬头看。</p>
+    </div>
+  </noscript>
 </body>
 </html>
